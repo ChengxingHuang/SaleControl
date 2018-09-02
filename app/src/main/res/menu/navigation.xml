@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_in"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/in"/>
+
+    <item
+        android:id="@+id/navigation_out"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/out"/>
+
+    <item
+        android:id="@+id/navigation_factory"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/return_to_factory"/>
+
+    <item
+        android:id="@+id/navigation_custom"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/custom_return"/>
+</menu>

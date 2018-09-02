@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SaleControl</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="in">In</string>
+    <string name="out">Out</string>
+    <string name="return_to_factory">Return to Factory</string>
+    <string name="custom_return">Custom Return</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

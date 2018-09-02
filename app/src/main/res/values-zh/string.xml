@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="in">入库</string>
+    <string name="out">出库</string>
+    <string name="return_to_factory">返厂</string>
+    <string name="custom_return">退货</string>
+</resources>
