@@ -12,22 +12,11 @@ import android.view.ViewGroup;
 
 public class BottomNavigationPagerAdapter extends FragmentPagerAdapter {
 
-    public static final int CATEGORY_FRAGMENT_POSITION = 0x00;
-    public static final int LIST_FRAGMENT_POSITION = 0x01;
-    private int mCurrentPosition;
+    private static final String TAG = "NavigationPagerAdapter";
 
     public BottomNavigationPagerAdapter(FragmentManager fm) {
         super(fm);
     }
-
-//    @Override
-//    public CharSequence getPageTitle(int position) {
-//        if(0 == position){
-//            return "Category";
-//        }else {
-//            return "List";
-//        }
-//    }
 
     @Override
     public Fragment getItem(int position) {
@@ -37,22 +26,12 @@ public class BottomNavigationPagerAdapter extends FragmentPagerAdapter {
             case 2: return new ReturnToFactoryFragment();
             case 3: return new CustomReturnFragment();
         }
-        Log.d("huangcx", "Fatal Error!!!");
+        Log.d(TAG, "Fatal Error:NavigationPager more than 4!!!");
         return null;
-    }
-
-    @Override
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
-        super.setPrimaryItem(container, position, object);
-        mCurrentPosition = position;
     }
 
     @Override
     public int getCount() {
         return 4;
-    }
-
-    public int getCurrentPosition(){
-        return mCurrentPosition;
     }
 }

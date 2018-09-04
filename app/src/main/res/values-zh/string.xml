@@ -4,4 +4,20 @@
     <string name="out">出库</string>
     <string name="return_to_factory">返厂</string>
     <string name="custom_return">退货</string>
+
+    <string name="id">编号：</string>
+    <string name="number">数量：</string>
+    <string name="price">单价：</string>
+    <string name="total_price">总价：</string>
+    <string name="manufacturer">厂商：</string>
+
+    <string name="id_empty">编号为空，无法入库</string>
+    <string name="number_empty">数量为空，无法入库</string>
+    <string name="success_in">入库成功</string>
+    <string name="success_out">出库成功</string>
+    <string name="number_error">数量应该大于1</string>
+    <string name="should_number">编号和数量需要为阿拉伯数字，请检查</string>
+
+    <string name="customer">客户：</string>
+    <string name="agent">介绍：</string>
 </resources>

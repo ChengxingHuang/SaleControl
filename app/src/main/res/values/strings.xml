@@ -9,6 +9,23 @@
     <string name="return_to_factory">Return to Factory</string>
     <string name="custom_return">Custom Return</string>
 
+    <string name="id">ID:</string>
+    <string name="number">Number:</string>
+    <string name="price">Price:</string>
+    <string name="total_price">Total Price:</string>
+    <string name="manufacturer">Manufacturer:</string>
+
+    <string name="id_empty">ID is empty, can\'t In</string>
+    <string name="number_empty">Number is empty, can\'t In</string>
+    <string name="success_in">Successfully In</string>
+    <string name="success_out">Successfully Out</string>
+    <string name="number_error">Number should be greater 0</string>
+    <string name="should_number">ID and Number must be a number</string>
+
+    <string name="customer">Customer</string>
+    <string name="agent">Agent</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

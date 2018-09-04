@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".InFragment">
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_marginTop="@dimen/main_fragment_top_margin"
+        android:layout_marginBottom="@dimen/main_fragment_bottom_margin"
+        android:layout_marginStart="@dimen/main_fragment_left_margin"
+        android:layout_marginEnd="@dimen/main_fragment_right_margin"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:divider="@null"/>
+
+    <Button
+        android:id="@+id/ok"
+        android:paddingStart="@dimen/main_fragment_button_padding"
+        android:paddingEnd="@dimen/main_fragment_button_padding"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@android:string/ok"/>
+</LinearLayout>
