@@ -1,6 +1,7 @@
 package com.sale.chengxinghuang.salecontrol;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,8 +82,25 @@ public class InFragment extends Fragment implements View.OnClickListener {
             }else if(Integer.parseInt(context[1]) <= 0){
                 Toast.makeText(mContext, mContext.getString(R.string.number_error), Toast.LENGTH_SHORT).show();
             }else {
-                // TODO: 2018/9/2 update to sql
-                Toast.makeText(mContext, mContext.getString(R.string.success_in), Toast.LENGTH_SHORT).show();
+                DateFormat df = SimpleDateFormat.getDateInstance();
+                DateFormat dfTime = SimpleDateFormat.getTimeInstance();
+                String date = df.format(new Date());
+                String time = dfTime.format(new Date());
+                Log.d(TAG, "current date:" + date + ", current time:" + time);
+
+                ContentValues values = new ContentValues();
+                values.put(SQLiteUtils.KEY_ID, context[0]);
+                values.put(SQLiteUtils.KEY_NUMBER, context[1]);
+                values.put(SQLiteUtils.KEY_PRICE, context[2]);
+                values.put(SQLiteUtils.KEY_TOTAL_PRICE, context[3]);
+                values.put(SQLiteUtils.KEY_MANUFACTURER, context[4]);
+                values.put(SQLiteUtils.KEY_DATE, date);
+                values.put(SQLiteUtils.KEY_TIME, time);
+                if(-1 != SQLiteUtils.insert(values)){
+                    Toast.makeText(mContext, R.string.success_in, Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(mContext, R.string.fail_in, Toast.LENGTH_SHORT).show();
+                }
             }
         }catch (NumberFormatException e){
             Toast.makeText(mContext, mContext.getString(R.string.should_number), Toast.LENGTH_SHORT).show();

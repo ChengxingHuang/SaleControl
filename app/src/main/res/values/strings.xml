@@ -18,13 +18,16 @@
     <string name="id_empty">ID is empty, can\'t In</string>
     <string name="number_empty">Number is empty, can\'t In</string>
     <string name="success_in">Successfully In</string>
+    <string name="fail_in">Fail In</string>
     <string name="success_out">Successfully Out</string>
+    <string name="fail_out">Fail Out</string>
     <string name="number_error">Number should be greater 0</string>
-    <string name="should_number">ID and Number must be a number</string>
+    <string name="should_number">Number must be a number</string>
 
     <string name="customer">Customer</string>
     <string name="agent">Agent</string>
 
+    <string name="search_hint">Please input ID</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
