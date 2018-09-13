@@ -3,6 +3,7 @@ package com.sale.chengxinghuang.salecontrol;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -54,8 +55,8 @@ public class InFragment extends Fragment implements View.OnClickListener {
                 new String[]{"title", "context"},
                 new int[]{R.id.title, R.id.edit_context});
 
-        mListView = (ListView)view.findViewById(R.id.list);
-        Button button = (Button)view.findViewById(R.id.ok);
+        mListView = view.findViewById(R.id.list);
+        Button button = view.findViewById(R.id.ok);
 
         button.setOnClickListener(this);
         mListView.setAdapter(mAdapter);
@@ -82,30 +83,72 @@ public class InFragment extends Fragment implements View.OnClickListener {
             }else if(Integer.parseInt(context[1]) <= 0){
                 Toast.makeText(mContext, mContext.getString(R.string.number_error), Toast.LENGTH_SHORT).show();
             }else {
-                DateFormat df = SimpleDateFormat.getDateInstance();
-                DateFormat dfTime = SimpleDateFormat.getTimeInstance();
-                String date = df.format(new Date());
-                String time = dfTime.format(new Date());
-                Log.d(TAG, "current date:" + date + ", current time:" + time);
+                try {
+                    // SQLite事务，必须两个表一起更新
+                    SQLiteUtils.beginTransaction();
 
-                ContentValues values = new ContentValues();
-                values.put(SQLiteUtils.KEY_ID, context[0]);
-                values.put(SQLiteUtils.KEY_NUMBER, context[1]);
-                values.put(SQLiteUtils.KEY_PRICE, context[2]);
-                values.put(SQLiteUtils.KEY_TOTAL_PRICE, context[3]);
-                values.put(SQLiteUtils.KEY_MANUFACTURER, context[4]);
-                values.put(SQLiteUtils.KEY_DATE, date);
-                values.put(SQLiteUtils.KEY_TIME, time);
-                if(-1 != SQLiteUtils.insert(values)){
+                    ContentValues values = new ContentValues();
+                    values.put(SQLiteUtils.KEY_ID, context[0]);
+                    values.put(SQLiteUtils.KEY_NUMBER, context[1]);
+
+                    /*
+                     ********************************
+                     ******** 更新stock table *******
+                     ********************************
+                     */
+                    Cursor cursor = SQLiteUtils.query(SQLiteUtils.STOCK_TABLE_NAME,
+                            new String[]{SQLiteUtils.KEY_ID, SQLiteUtils.KEY_NUMBER},
+                            SQLiteUtils.KEY_ID + "=?",
+                            new String[]{context[0]});
+                    if (cursor.getCount() > 0) {
+                        // ID存在，更新number数据
+                        cursor.moveToFirst();
+                        int currentNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(SQLiteUtils.KEY_NUMBER)));
+                        currentNumber += Integer.parseInt(context[1]);
+                        values.put(SQLiteUtils.KEY_NUMBER, currentNumber + "");
+                        Log.d(TAG, "update id = " + context[0] + ", number = " + currentNumber);
+                        if(1 != SQLiteUtils.update(SQLiteUtils.STOCK_TABLE_NAME, values, "ID=?", new String[]{context[0]})){
+                            throw new Exception("update to stock fail!!!");
+                        }
+                    } else {
+                        // ID不存在，新建一行
+                        if(-1 == SQLiteUtils.insert(SQLiteUtils.STOCK_TABLE_NAME, values)){
+                            throw new Exception("insert to stock fail!!!");
+                        }
+                    }
+
+                    /*
+                     ********************************
+                     ******* 更新details table ******
+                     ********************************
+                     */
+                    DateFormat df = SimpleDateFormat.getDateInstance();
+                    DateFormat dfTime = SimpleDateFormat.getTimeInstance();
+                    String date = df.format(new Date());
+                    String time = dfTime.format(new Date());
+                    Log.d(TAG, "current date:" + date + ", current time:" + time);
+
+                    values.put(SQLiteUtils.KEY_PRICE, context[2]);
+                    values.put(SQLiteUtils.KEY_TOTAL_PRICE, context[3]);
+                    values.put(SQLiteUtils.KEY_MANUFACTURER, context[4]);
+                    values.put(SQLiteUtils.KEY_DATE, date);
+                    values.put(SQLiteUtils.KEY_TIME, time);
+
+                    if(-1 == SQLiteUtils.insert(SQLiteUtils.DETAIL_TABLE_NAME, values)){
+                        throw new Exception("insert to details fail!!!");
+                    }
+                    SQLiteUtils.setTransactionSuccessful();
                     Toast.makeText(mContext, R.string.success_in, Toast.LENGTH_SHORT).show();
-                }else{
+                }catch (Exception e){
+                    Log.d(TAG, "SQLite fatal error:" + e.getMessage());
                     Toast.makeText(mContext, R.string.fail_in, Toast.LENGTH_SHORT).show();
+                } finally{
+                    SQLiteUtils.endTransaction();
                 }
             }
         }catch (NumberFormatException e){
             Toast.makeText(mContext, mContext.getString(R.string.should_number), Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void initBeanList(){

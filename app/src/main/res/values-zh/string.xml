@@ -14,7 +14,9 @@
     <string name="id_empty">编号为空，无法入库</string>
     <string name="number_empty">数量为空，无法入库</string>
     <string name="success_in">入库成功</string>
+    <string name="fail_in">入库失败</string>
     <string name="success_out">出库成功</string>
+    <string name="fail_out">出库失败</string>
     <string name="number_error">数量应该大于1</string>
     <string name="should_number">数量需要为阿拉伯数字，请检查</string>
 

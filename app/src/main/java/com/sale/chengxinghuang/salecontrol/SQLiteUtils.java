@@ -17,7 +17,8 @@ public class SQLiteUtils {
     public static final String KEY_MANUFACTURER = "MANUFACTURER";
     public static final String KEY_AGENT = "AGENT";
     public static final String KEY_CUSTOMER = "CUSTOMER";
-    public static final String TABLE_NAME = "goods";
+    public static final String DETAIL_TABLE_NAME = "detail";
+    public static final String STOCK_TABLE_NAME = "stock";
 
     private static SQLiteDatabase mGoodsSqlDb;
 
@@ -26,26 +27,37 @@ public class SQLiteUtils {
         mGoodsSqlDb = sqLiteOpenHelper.getWritableDatabase();
     }
 
-    public static long insert(ContentValues values){
-        return mGoodsSqlDb.insert(TABLE_NAME, null, values);
+    public static long insert(String table, ContentValues values){
+        return mGoodsSqlDb.insert(table, null, values);
     }
 
-    public static int delete(String whereClause, String[] whereArgs){
-        return mGoodsSqlDb.delete(TABLE_NAME, whereClause, whereArgs);
+    public static int delete(String table, String whereClause, String[] whereArgs){
+        return mGoodsSqlDb.delete(table, whereClause, whereArgs);
     }
 
-    public static int update(ContentValues values, String whereClause, String[] whereArgs){
-        return mGoodsSqlDb.update(TABLE_NAME, values, whereClause, whereArgs);
+    public static int update(String table, ContentValues values, String whereClause, String[] whereArgs){
+        return mGoodsSqlDb.update(table, values, whereClause, whereArgs);
     }
 
-    public static Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {
-        return mGoodsSqlDb.query(TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+    public static Cursor query(String table, String[] columns, String selection, String[] selectionArgs) {
+        return mGoodsSqlDb.query(table, columns, selection, selectionArgs, null, null, null);
     }
 
     public static void execSQL(String sql){
         mGoodsSqlDb.execSQL(sql);
     }
 
+    public static void beginTransaction(){
+        mGoodsSqlDb.beginTransaction();
+    }
+
+    public static void setTransactionSuccessful(){
+        mGoodsSqlDb.setTransactionSuccessful();
+    }
+
+    public static void endTransaction(){
+        mGoodsSqlDb.endTransaction();
+    }
 }
 
 class GoodsSQLiteOpenHelper extends SQLiteOpenHelper {
@@ -56,7 +68,7 @@ class GoodsSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE " + SQLiteUtils.TABLE_NAME + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        sqLiteDatabase.execSQL("CREATE TABLE " + SQLiteUtils.DETAIL_TABLE_NAME + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "ID TEXT NOT NULL, " +
                 "NUMBER TEXT NOT NULL, " +
                 "DATE TEXT NOT NULL, " +
@@ -66,6 +78,9 @@ class GoodsSQLiteOpenHelper extends SQLiteOpenHelper {
                 "MANUFACTURER TEXT, " +
                 "AGENT TEXT, " +
                 "CUSTOMER TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + SQLiteUtils.STOCK_TABLE_NAME + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "ID TEXT NOT NULL, " +
+                "NUMBER TEXT NOT NULL)");
     }
 
     @Override
