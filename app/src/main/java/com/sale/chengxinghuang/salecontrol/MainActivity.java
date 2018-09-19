@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_out:
                     mViewPager.setCurrentItem(1);
                     return true;
-                case R.id.navigation_factory:
+                case R.id.navigation_custom:
                     mViewPager.setCurrentItem(2);
                     return true;
-                case R.id.navigation_custom:
-                    mViewPager.setCurrentItem(3);
-                    return true;
+//                case R.id.navigation_custom:
+//                    mViewPager.setCurrentItem(3);
+//                    return true;
             }
             return false;
         }
@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
             switch (i){
                 case 0: mBottomNavigationView.setSelectedItemId(R.id.navigation_in);break;
                 case 1: mBottomNavigationView.setSelectedItemId(R.id.navigation_out);break;
-                case 2: mBottomNavigationView.setSelectedItemId(R.id.navigation_factory);break;
-                case 3: mBottomNavigationView.setSelectedItemId(R.id.navigation_custom);break;
+                case 2: mBottomNavigationView.setSelectedItemId(R.id.navigation_custom);break;
+                //case 3: mBottomNavigationView.setSelectedItemId(R.id.navigation_custom);break;
             }
         }
 

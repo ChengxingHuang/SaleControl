@@ -23,15 +23,15 @@ public class BottomNavigationPagerAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0: return new InFragment();
             case 1: return new OutFragment();
-            case 2: return new ReturnToFactoryFragment();
-            case 3: return new CustomReturnFragment();
+            case 2: return new CustomReturnFragment();
+            //case 3: return new CustomReturnFragment();
         }
-        Log.d(TAG, "Fatal Error:NavigationPager more than 4!!!");
+        Log.d(TAG, "Fatal Error:NavigationPager more than 3!!!");
         return null;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 }
