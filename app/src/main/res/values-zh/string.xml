@@ -26,6 +26,8 @@
     <string name="should_number">数量需要为阿拉伯数字，请检查</string>
     <string name="attention">注意</string>
     <string name="handler_sql_fail">更新数据失败，请联系开发者！！！</string>
+    <string name="no_record">没有关于该编号的记录</string>
+    <string name="store_count">该编号的库存量为</string>
 
     <string name="customer">客户：</string>
     <string name="agent">介绍：</string>

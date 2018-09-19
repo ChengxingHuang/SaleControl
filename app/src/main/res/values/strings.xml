@@ -25,7 +25,8 @@
     <string name="should_number">Number must be a number</string>
     <string name="attention">Attention</string>
     <string name="handler_sql_fail">Handler sql fail</string>
-    <string name="more_in">Out more than in</string>
+    <string name="no_record">No record about this ID</string>
+    <string name="store_count">The number about this ID:</string>
 
     <string name="customer">Customer</string>
     <string name="agent">Agent</string>

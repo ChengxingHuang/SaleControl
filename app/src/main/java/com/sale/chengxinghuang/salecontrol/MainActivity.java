@@ -103,7 +103,17 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("huangcx", query);
+                Cursor cursor = SQLiteUtils.query(SQLiteUtils.STOCK_TABLE_NAME,
+                        new String[]{SQLiteUtils.KEY_ID, SQLiteUtils.KEY_NUMBER},
+                        SQLiteUtils.KEY_ID + "=?",
+                        new String[]{query});
+                if (cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    int currentNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(SQLiteUtils.KEY_NUMBER)));
+                    showAlertDialog(getString(R.string.store_count) + currentNumber);
+                }else{
+                    showAlertDialog(getString(R.string.no_record));
+                }
                 return true;
             }
 
@@ -197,18 +207,22 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }catch (Exception e){
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle(R.string.attention);
-            builder.setMessage(R.string.handler_sql_fail);
-            builder.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            });
-            builder.create().show();
+            showAlertDialog(getString(R.string.handler_sql_fail));
         }finally {
             SQLiteUtils.endTransaction();
         }
+    }
+
+    private void showAlertDialog(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.attention);
+        builder.setMessage(message);
+        builder.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 }
