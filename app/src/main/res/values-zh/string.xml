@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">库存管理</string>
+    <string name="main_activity_title">库存管理</string>
     <string name="in">入库</string>
     <string name="out">出库</string>
     <string name="return_to_factory">返厂</string>
@@ -17,8 +19,13 @@
     <string name="fail_in">入库失败</string>
     <string name="success_out">出库成功</string>
     <string name="fail_out">出库失败</string>
+    <string name="success_return">退货成功</string>
+    <string name="fail_return">退货失败</string>
+    <string name="id_not_exist">输入的编号不存在，请先将该编号入库</string>
     <string name="number_error">数量应该大于1</string>
     <string name="should_number">数量需要为阿拉伯数字，请检查</string>
+    <string name="attention">注意</string>
+    <string name="handler_sql_fail">更新数据失败，请联系开发者！！！</string>
 
     <string name="customer">客户：</string>
     <string name="agent">介绍：</string>

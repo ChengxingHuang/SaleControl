@@ -1,9 +1,6 @@
 <resources>
-    <string name="app_name">SaleControl</string>
-    <string name="title_activity_navigation">NavigationActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">Stock Manager</string>
+    <string name="main_activity_title">Stock Manager</string>
     <string name="in">In</string>
     <string name="out">Out</string>
     <string name="return_to_factory">Return to Factory</string>
@@ -21,8 +18,14 @@
     <string name="fail_in">Fail In</string>
     <string name="success_out">Successfully Out</string>
     <string name="fail_out">Fail Out</string>
+    <string name="success_return">Successfully return</string>
+    <string name="fail_return">Fail return</string>
+    <string name="id_not_exist">ID is not exist,please check</string>
     <string name="number_error">Number should be greater 0</string>
     <string name="should_number">Number must be a number</string>
+    <string name="attention">Attention</string>
+    <string name="handler_sql_fail">Handler sql fail</string>
+    <string name="more_in">Out more than in</string>
 
     <string name="customer">Customer</string>
     <string name="agent">Agent</string>

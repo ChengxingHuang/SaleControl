@@ -17,13 +17,19 @@ public class SQLiteUtils {
     public static final String KEY_MANUFACTURER = "MANUFACTURER";
     public static final String KEY_AGENT = "AGENT";
     public static final String KEY_CUSTOMER = "CUSTOMER";
+    public static final String KEY_TYPE = "TYPE";
     public static final String DETAIL_TABLE_NAME = "detail";
     public static final String STOCK_TABLE_NAME = "stock";
+    public static final int TYPE_IN = 1;
+    public static final int TYPE_OUT = 2;
+    public static final int TYPE_RETURN = 3;
+
+    private static final int DB_VERSION = 0x01;
 
     private static SQLiteDatabase mGoodsSqlDb;
 
     public static void initSQLite(Context context){
-        GoodsSQLiteOpenHelper sqLiteOpenHelper = new GoodsSQLiteOpenHelper(context, "goods.db", null, 0x01);
+        GoodsSQLiteOpenHelper sqLiteOpenHelper = new GoodsSQLiteOpenHelper(context, "goods.db", null, DB_VERSION);
         mGoodsSqlDb = sqLiteOpenHelper.getWritableDatabase();
     }
 
@@ -73,6 +79,7 @@ class GoodsSQLiteOpenHelper extends SQLiteOpenHelper {
                 "NUMBER TEXT NOT NULL, " +
                 "DATE TEXT NOT NULL, " +
                 "TIME TEXT NOT NULL, " +
+                "TYPE INTEGER, " +
                 "PRICE TEXT, " +
                 "TOTAL_PRICE TEXT, " +
                 "MANUFACTURER TEXT, " +

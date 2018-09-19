@@ -2,9 +2,11 @@ package com.sale.chengxinghuang.salecontrol;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,8 +50,8 @@ public class CustomReturnFragment extends Fragment implements View.OnClickListen
                 new String[]{"title", "context"},
                 new int[]{R.id.title, R.id.edit_context});
 
-        mListView = (ListView)view.findViewById(R.id.list);
-        Button button = (Button)view.findViewById(R.id.ok);
+        mListView = view.findViewById(R.id.list);
+        Button button = view.findViewById(R.id.ok);
 
         button.setOnClickListener(this);
         mListView.setAdapter(mAdapter);
@@ -71,18 +72,30 @@ public class CustomReturnFragment extends Fragment implements View.OnClickListen
 
         try{
             if(context[0].isEmpty()){
-                Toast.makeText(mContext, mContext.getString(R.string.id_empty), Toast.LENGTH_SHORT).show();
+                showAlertDialog(R.string.id_empty);
             }else if(context[1].isEmpty()){
-                Toast.makeText(mContext, mContext.getString(R.string.number_empty), Toast.LENGTH_SHORT).show();
+                showAlertDialog(R.string.number_empty);
             }else if(Integer.parseInt(context[1]) <= 0){
-                Toast.makeText(mContext, mContext.getString(R.string.number_error), Toast.LENGTH_SHORT).show();
+                showAlertDialog(R.string.number_error);
             }else {
-                // TODO: 2018/9/2 update to sql
-                Toast.makeText(mContext, mContext.getString(R.string.success_in), Toast.LENGTH_SHORT).show();
+                ((MainActivity)mContext).updateTables(context[0], context[1], SQLiteUtils.TYPE_RETURN, context[2], context[3], context[4], null, null);
             }
         }catch (NumberFormatException e){
-            Toast.makeText(mContext, mContext.getString(R.string.should_number), Toast.LENGTH_SHORT).show();
+            showAlertDialog(R.string.should_number);
         }
+    }
+
+    private void showAlertDialog(int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(R.string.attention);
+        builder.setMessage(message);
+        builder.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 
     private void initBeanList(){
